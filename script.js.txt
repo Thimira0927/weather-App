@@ -1,3 +1,0 @@
-script.js
-const apiKey="YOUR_API_KEY"
-e9cef5ca570c169a2ef91d3a4b0e3916
