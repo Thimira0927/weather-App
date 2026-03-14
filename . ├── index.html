@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Weather App</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- Background Video -->
+<video autoplay muted loop playsinline id="bg-video">
+<source src="c:\Users\thimi\Downloads\5487781-uhd_3840_2160_30fps.mp4" type="video/mp4">
+</video>
+
+<div class="container">
+
+<h1>Weather App</h1>
+
+<input type="text" id="city" placeholder="Enter city">
+
+<button onclick="getWeather()">Get Weather</button>
+
+<button onclick="getLocationWeather()">Use My Location</button>
+<button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+<div id="result"></div>
+
+<div id="forecast"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
