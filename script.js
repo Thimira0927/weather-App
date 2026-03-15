@@ -1,6 +1,6 @@
 const apiKey = "e9cef5ca570c169a2ef91d3a4b0e3916";
 
-/* Get Weather by City */
+/* CITY WEATHER */
 
 async function getWeather(){
 
@@ -30,17 +30,15 @@ return;
 const icon = data.weather[0].icon;
 
 result.innerHTML = `
-
 <h2>${data.name}</h2>
-
 <img id="weatherIcon"
 src="https://openweathermap.org/img/wn/${icon}@2x.png">
 
 <p>Temperature: ${data.main.temp} °C</p>
-
 <p>${data.weather[0].description}</p>
-
 `;
+
+getForecast(city);   // 👈 forecast call
 
 }catch(error){
 
@@ -50,7 +48,54 @@ result.innerHTML = "Error loading weather";
 
 }
 
-/* Use My Location */
+
+/* 5 DAY FORECAST */
+
+async function getForecast(city){
+
+const forecastDiv = document.getElementById("forecast");
+
+try{
+
+const response = await fetch(
+`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`
+);
+
+const data = await response.json();
+
+forecastDiv.innerHTML = "";
+
+for(let i=0;i<5;i++){
+
+const day = data.list[i*8];
+const icon = day.weather[0].icon;
+
+forecastDiv.innerHTML += `
+
+<div class="forecast-card">
+
+<p>${new Date(day.dt_txt).toDateString()}</p>
+
+<img src="https://openweathermap.org/img/wn/${icon}.png">
+
+<p>${day.main.temp} °C</p>
+
+</div>
+
+`;
+
+}
+
+}catch(error){
+
+forecastDiv.innerHTML = "Forecast error";
+
+}
+
+}
+
+
+/* LOCATION WEATHER */
 
 function getLocationWeather(){
 
@@ -79,7 +124,6 @@ const data = await response.json();
 const icon = data.weather[0].icon;
 
 result.innerHTML = `
-
 <h2>${data.name}</h2>
 
 <img id="weatherIcon"
@@ -88,8 +132,9 @@ src="https://openweathermap.org/img/wn/${icon}@2x.png">
 <p>Temperature: ${data.main.temp} °C</p>
 
 <p>${data.weather[0].description}</p>
-
 `;
+
+getForecast(data.name);   // 👈 forecast with location
 
 }catch(error){
 
@@ -97,11 +142,16 @@ result.innerHTML = "Location weather error";
 
 }
 
+}, function(){
+
+result.innerHTML = "Location permission denied";
+
 });
 
 }
 
-/* Dark Mode */
+
+/* DARK MODE */
 
 function toggleDarkMode(){
 
