@@ -72,7 +72,10 @@ const icon = data.weather[0].icon;
 changeBackground(data.weather[0].main.toLowerCase());
 
 result.innerHTML = `
-<h2>${data.name}, ${data.sys.country}</h2>
+<h2>
+${data.name}, ${data.sys.country}
+<img class="flag" src="https://flagsapi.com/${data.sys.country}/flat/32.png">
+</h2>
 
 <img id="weatherIcon"
 src="https://openweathermap.org/img/wn/${icon}@2x.png">
@@ -188,7 +191,10 @@ changeBackground(data.weather[0].main.toLowerCase());
 
 result.innerHTML = `
 
-<h2>${data.name}, ${data.sys.country}</h2>
+<h2>
+${data.name}, ${data.sys.country}
+<img class="flag" src="https://flagsapi.com/${data.sys.country}/flat/32.png">
+</h2>
 
 <img id="weatherIcon"
 src="https://openweathermap.org/img/wn/${icon}@2x.png">
