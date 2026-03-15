@@ -20,6 +20,11 @@ return
 
 const data = await response.json()
 
+  const icon = data.weather[0].icon;
+const iconUrl = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+
+document.getElementById("icon").src = iconUrl;
+
 /* Current Weather */
 
 result.innerHTML=`
