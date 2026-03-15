@@ -93,17 +93,11 @@ animation:float 2s ease-in-out infinite;
 
 @keyframes float{
 
-0%{
-transform:translateY(0px);
-}
+0%{transform:translateY(0px);}
 
-50%{
-transform:translateY(-10px);
-}
+50%{transform:translateY(-10px);}
 
-100%{
-transform:translateY(0px);
-}
+100%{transform:translateY(0px);}
 
 }
 
@@ -114,14 +108,14 @@ margin-top:20px;
 font-size:18px;
 }
 
-/* Forecast Section (GRID FIX) */
+/* Forecast Section (RESPONSIVE FIX) */
 
 #forecast{
 display:grid;
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
 gap:12px;
-justify-items:center;
 margin-top:20px;
+justify-items:center;
 }
 
 /* Forecast cards */
@@ -130,7 +124,8 @@ margin-top:20px;
 background:white;
 padding:10px;
 border-radius:10px;
-width:80px;
+width:100%;
+max-width:90px;
 font-size:13px;
 text-align:center;
 box-shadow:0 3px 8px rgba(0,0,0,0.3);
