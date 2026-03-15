@@ -58,6 +58,23 @@ button:hover{
 background:#0000cc;
 transform:scale(1.05);
 }
+@media (max-width: 600px) {
+
+.container{
+width:90%;
+padding:20px;
+}
+
+input{
+width:100%;
+}
+
+button{
+width:100%;
+margin-top:10px;
+}
+
+}
 
 /* Weather icon animation */
 
