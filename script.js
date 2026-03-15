@@ -195,3 +195,12 @@ function toggleDarkMode(){
 document.body.classList.toggle("dark-mode");
 
 }
+
+
+/* AUTO WEATHER LOAD */
+
+window.onload = function(){
+
+getLocationWeather();
+
+};
