@@ -1,5 +1,30 @@
 const apiKey = "e9cef5ca570c169a2ef91d3a4b0e3916";
 
+/* CHANGE BACKGROUND BASED ON WEATHER */
+
+function changeBackground(weather){
+
+const video = document.getElementById("bg-video");
+
+if(weather.includes("cloud")){
+video.src = "clouds.mp4";
+}
+
+else if(weather.includes("rain")){
+video.src = "rain.mp4";
+}
+
+else if(weather.includes("clear")){
+video.src = "sunny.mp4";
+}
+
+else{
+video.src = "background.mp4";
+}
+
+}
+
+
 /* CITY WEATHER */
 
 async function getWeather(){
@@ -29,16 +54,22 @@ return;
 
 const icon = data.weather[0].icon;
 
+/* CHANGE BACKGROUND */
+
+changeBackground(data.weather[0].main.toLowerCase());
+
 result.innerHTML = `
 <h2>${data.name}</h2>
+
 <img id="weatherIcon"
 src="https://openweathermap.org/img/wn/${icon}@2x.png">
 
 <p>Temperature: ${data.main.temp} °C</p>
+
 <p>${data.weather[0].description}</p>
 `;
 
-getForecast(city);   // 👈 forecast call
+getForecast(city);
 
 }catch(error){
 
@@ -123,7 +154,12 @@ const data = await response.json();
 
 const icon = data.weather[0].icon;
 
+/* CHANGE BACKGROUND */
+
+changeBackground(data.weather[0].main.toLowerCase());
+
 result.innerHTML = `
+
 <h2>${data.name}</h2>
 
 <img id="weatherIcon"
@@ -132,9 +168,10 @@ src="https://openweathermap.org/img/wn/${icon}@2x.png">
 <p>Temperature: ${data.main.temp} °C</p>
 
 <p>${data.weather[0].description}</p>
+
 `;
 
-getForecast(data.name);   // 👈 forecast with location
+getForecast(data.name);
 
 }catch(error){
 
