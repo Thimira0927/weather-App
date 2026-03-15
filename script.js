@@ -31,13 +31,17 @@ async function getWeather(){
 
 const city = document.getElementById("city").value;
 const result = document.getElementById("result");
+const loader = document.getElementById("loader");
 
 if(city === ""){
-result.innerHTML = "Please enter a city";
+result.innerHTML = "<p>⚠️ Please enter a city</p>";
 return;
 }
 
-result.innerHTML = "Loading...";
+/* SHOW SPINNER */
+
+loader.style.display = "block";
+result.innerHTML = "";
 
 try{
 
@@ -47,8 +51,17 @@ const response = await fetch(
 
 const data = await response.json();
 
+/* HIDE SPINNER */
+
+loader.style.display = "none";
+
 if(response.status !== 200){
-result.innerHTML = "City not found";
+
+result.innerHTML = `
+<h3>❌ City not found</h3>
+<p>Try another city</p>
+`;
+
 return;
 }
 
@@ -73,7 +86,12 @@ getForecast(city);
 
 }catch(error){
 
-result.innerHTML = "Error loading weather";
+loader.style.display = "none";
+
+result.innerHTML = `
+<h3>⚠️ Error loading weather</h3>
+<p>Please try again</p>
+`;
 
 }
 
@@ -131,13 +149,15 @@ forecastDiv.innerHTML = "Forecast error";
 function getLocationWeather(){
 
 const result = document.getElementById("result");
+const loader = document.getElementById("loader");
 
 if(!navigator.geolocation){
 result.innerHTML = "Geolocation not supported";
 return;
 }
 
-result.innerHTML = "Getting location...";
+loader.style.display = "block";
+result.innerHTML = "";
 
 navigator.geolocation.getCurrentPosition(async position => {
 
@@ -151,6 +171,8 @@ const response = await fetch(
 );
 
 const data = await response.json();
+
+loader.style.display = "none";
 
 const icon = data.weather[0].icon;
 
@@ -175,11 +197,15 @@ getForecast(data.name);
 
 }catch(error){
 
+loader.style.display = "none";
+
 result.innerHTML = "Location weather error";
 
 }
 
 }, function(){
+
+loader.style.display = "none";
 
 result.innerHTML = "Location permission denied";
 
@@ -204,3 +230,14 @@ window.onload = function(){
 getLocationWeather();
 
 };
+
+
+/* ENTER KEY SEARCH */
+
+document.getElementById("city").addEventListener("keypress", function(e){
+
+if(e.key === "Enter"){
+getWeather();
+}
+
+});
