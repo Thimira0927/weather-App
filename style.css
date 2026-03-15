@@ -106,7 +106,7 @@ margin-top:10px;
 /* Weather icon animation */
 
 #weatherIcon{
-width:100px;
+width:140px;
 animation:float 2s ease-in-out infinite;
 }
 
@@ -187,6 +187,16 @@ color:white;
 background:#222;
 color:white;
 border:1px solid #555;
+}
+/* Hide Scrollbar */
+
+.container::-webkit-scrollbar{
+display:none;
+}
+
+.container{
+-ms-overflow-style:none;
+scrollbar-width:none;
 }
 
 /* Dark mode buttons */
